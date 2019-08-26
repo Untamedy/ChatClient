@@ -12,13 +12,15 @@ public class Main {
 			Thread th = new Thread(new GetThread());
 			th.setDaemon(true);
 			th.start();
-
+                        
+                    System.out.println("Enter user login whom the message will sent");
+                    String to = scanner.nextLine();
             System.out.println("Enter your message: ");
 			while (true) {
 				String text = scanner.nextLine();
 				if (text.isEmpty()) break;
 
-				Message m = new Message(login, text);
+				Message m = new Message(login, text,to);
 				int res = m.send(Utils.getURL() + "/add");
 
 				if (res != 200) { // 200 OK
