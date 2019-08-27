@@ -1,5 +1,6 @@
-package chatclient;
+package chatclient.procesing;
 
+import chatclient.entities.Message;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

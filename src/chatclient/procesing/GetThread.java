@@ -1,5 +1,8 @@
-package chatclient;
+package chatclient.procesing;
 
+import chatclient.source.Utils;
+import chatclient.procesing.JsonMessages;
+import chatclient.entities.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

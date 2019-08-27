@@ -1,4 +1,4 @@
-package chatclient;
+package chatclient.source;
 
 public class Utils {
     private static final String URL = "http://127.0.0.1";
