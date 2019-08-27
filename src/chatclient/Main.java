@@ -31,32 +31,41 @@ public class Main {
             }
 
             System.out.println("Select Chat-Room");
-            System.out.println("Write 'All' to select common room or 'Sport' to select sport room");
+            System.out.println("Write 'All' to select common room or 'Sport' to select sport fanats room");
             String room = scanner.nextLine();
             user.setRoom(room);
             
             
             
-            Thread th = new Thread(new GetThread());
+            Thread th = new Thread(new GetThread(user));
             th.setDaemon(true);
             th.start();
 
+           
             System.out.println("Enter user login whom the message will sent");
             String to = scanner.nextLine();
+            System.out.println("Is it a private message(Yes/No)");
+            String isPrivate = scanner.nextLine();            
+            
             System.out.println("Enter your message: ");
             while (true) {
                 String text = scanner.nextLine();
                 if (text.isEmpty()) {
                     break;
                 }
-
-                Message m = new Message(user.getName(), text, to);
+                
+                Message m = new Message(user.getName(), text, to);  
+                if(isPrivate.equalsIgnoreCase("Yes")){
+                   m.setIsprivate(true);
+                }
+                
                 int res = m.send(Utils.getURL() + "/add");
 
                 if (res != 200) { // 200 OK
                     System.out.println("HTTP error occured: " + res);
                     return;
                 }
+                
             }
         } catch (IOException ex) {
         }

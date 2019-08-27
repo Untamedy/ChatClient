@@ -101,4 +101,14 @@ public class Message {
     public void setText(String text) {
         this.text = text;
     }
+
+    public boolean isIsprivate() {
+        return isprivate;
+    }
+
+    public void setIsprivate(boolean isprivate) {
+        this.isprivate = isprivate;
+    }
+    
+    
 }

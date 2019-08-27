@@ -1,8 +1,8 @@
 package chatclient.procesing;
 
 import chatclient.source.Utils;
-import chatclient.procesing.JsonMessages;
 import chatclient.entities.Message;
+import chatclient.entities.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,9 +15,11 @@ public class GetThread implements Runnable {
 
     private final ObjectMapper mapper;
     private int n;
+    private User user;
 
-    public GetThread() {
+    public GetThread(User user) {
         mapper = new ObjectMapper();
+        this.user = user;
     }
 
     @Override
@@ -35,8 +37,16 @@ public class GetThread implements Runnable {
                     JsonMessages list = mapper.readValue(strBuf, JsonMessages.class);
                     if (list != null) {
                         for (Message m : list.getList()) {
-                            System.out.println(m);
-                            n++;
+                            if(!m.isIsprivate()){
+                                System.out.println(m);
+                            }else{  
+                                if(user.getName().equalsIgnoreCase(m.getTo())){
+                                System.out.println(m);   
+                                }else{
+                                    continue;
+                                }
+                            }
+                           n++; 
                         }
                     }
                 } finally {
