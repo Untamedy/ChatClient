@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lenovo/Documents/ChatClient/src/chatclient/Message.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/ChatClient/src/chatclient/Main.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/ChatClient/src/chatclient/procesing/GetThread.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/ChatClient/src/chatclient/entities/Message.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/ChatClient/src/chatclient/procesing/UserList.java</file>
         </group>
     </open-files>
 </project-private>

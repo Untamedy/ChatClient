@@ -47,11 +47,16 @@ public class Main {
             System.out.println("Is it a private message(Yes/No)");
             String isPrivate = scanner.nextLine();            
             
+            
+            
             System.out.println("Enter your message: ");
             while (true) {
                 String text = scanner.nextLine();
                 if (text.isEmpty()) {
                     break;
+                }
+                if(text.equalsIgnoreCase("show all users")){
+                    
                 }
                 
                 Message m = new Message(user.getName(), text, to);  
