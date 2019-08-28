@@ -43,6 +43,8 @@ public class Message {
             message = mapper.readValue(s, Message.class);
         } catch (JsonProcessingException ex) {
             Logger.getLogger(Message.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Message.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return message;

@@ -7,9 +7,17 @@ package chatclient.procesing;
 
 import chatclient.entities.Message;
 import chatclient.entities.User;
+import static chatclient.procesing.Login.LOGGER;
+import static chatclient.procesing.Login.fromJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,20 +28,44 @@ import java.util.logging.Logger;
  * @author Lenovo
  */
 public class UserList {
-    
-    private static  List<User> listOfUser = new ArrayList();
 
-    
-     public static Message fromJSON(InputStream input) {  
-         ObjectMapper mapper = new ObjectMapper();
+    public UserList() {
+    }
+
+    public static List<User> fromJSON(InputStream input) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<User> listOfUser = new ArrayList();
         try {
-            listOfUser = mapper.readValue(input, UserList.class);
+            listOfUser = (List<User>) mapper.readValue(input, List.class);
         } catch (JsonProcessingException ex) {
             Logger.getLogger(Message.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UserList.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return message;
+        return listOfUser;
     }
-    
-    
+
+    public static List<User> send(String url) {
+        List<User> list = new ArrayList<>();
+        try {
+            URL obj = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+
+            conn.setRequestMethod("Get");
+            conn.setDoOutput(true);
+
+            if (conn.getResponseCode() == 200) {
+                list = fromJSON(conn.getInputStream());
+            }
+
+        } catch (MalformedURLException ex) {
+            LOGGER.warning(ex.getMessage());
+        } catch (IOException ex) {
+            LOGGER.warning(ex.getMessage());
+        }
+        return list;
+    }
+
+   
 }

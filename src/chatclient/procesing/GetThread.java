@@ -42,8 +42,6 @@ public class GetThread implements Runnable {
                             }else{  
                                 if(user.getName().equalsIgnoreCase(m.getTo())){
                                 System.out.println(m);   
-                                }else{
-                                    continue;
                                 }
                             }
                            n++; 
