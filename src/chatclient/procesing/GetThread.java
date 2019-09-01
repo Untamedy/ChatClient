@@ -26,7 +26,7 @@ public class GetThread implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                URL url = new URL(Utils.getURL() + "/get?from=" + n);
+                URL url = new URL(Utils.getURL() + "/get?from=" + n+"&room="+user.getRoom());
                 HttpURLConnection http = (HttpURLConnection) url.openConnection();
 
                 InputStream is = http.getInputStream();

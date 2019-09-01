@@ -7,7 +7,7 @@ package chatclient.entities;
 public class User {
     private String name;
     private String password;
-    private boolean status = false;
+    private String status = "off";
     private String room;
 
     public User() {
@@ -34,11 +34,11 @@ public class User {
         this.password = password;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

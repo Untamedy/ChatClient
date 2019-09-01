@@ -16,15 +16,18 @@ public class Message {
     private Date date = new Date();
     private String from;
     private String to;
-    private String text;
-    private static ObjectMapper mapper;
+    private String text;   
+    private String room = "all";
+    private static ObjectMapper mapper=new ObjectMapper();
     private boolean isprivate = false;
 
+    public Message() {
+    }
+    
     public Message(String from, String text, String to) {
         this.from = from;
         this.text = text;
-        this.to = to;
-        mapper = new ObjectMapper();
+        this.to = to;       
     }
 
     public String toJSON() {
@@ -111,6 +114,16 @@ public class Message {
     public void setIsprivate(boolean isprivate) {
         this.isprivate = isprivate;
     }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+    
+    
     
     
 }
