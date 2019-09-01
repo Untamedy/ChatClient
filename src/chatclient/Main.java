@@ -29,7 +29,7 @@ public class Main {
                 System.out.println("Enter your password");
                 String pass = scanner.nextLine();
 
-                user = Login.send(Utils.getURL() + "/login" + "?login=" + login + "&pass=" + pass);
+                user = Login.send(Utils.getURL() + "/ChatServer/login" + "?login=" + login + "&pass=" + pass);
 
                 if (null == user) {
                     System.out.println("Ooops, Something went wrong. Try again");
