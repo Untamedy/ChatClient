@@ -32,7 +32,7 @@ public class Login {
     
 
     public static User send(String url) {
-        StringBuilder content;
+      
         User user = null;
 
         try {

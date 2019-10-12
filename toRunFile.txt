@@ -1,0 +1,1 @@
+C:\Users\YBolshakova\Documents\gs-maven\ChatClient\dist> java -jar  ChatClient.jar

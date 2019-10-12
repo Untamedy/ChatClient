@@ -1,12 +1,18 @@
 package chatclient;
 
-import chatclient.procesing.GetThread;
+
 import chatclient.source.Utils;
 import chatclient.entities.Message;
 import chatclient.entities.User;
 import chatclient.procesing.Login;
 import chatclient.procesing.UserList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -14,15 +20,10 @@ import java.util.logging.Logger;
 
 public class Main {
 
-    public static void main(String[] args) {
-        
-       
-        //   Socket socket = new Socket("localhost",8080)
+    public static void main(String[] args) throws IOException {
+
         try (Scanner scanner = new Scanner(System.in)) {
             User user = new User();
-           // PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
-           // BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
             while (user.getStatus().equals("off")) {
                 System.out.println("Enter your login: ");
                 String login = scanner.nextLine();
@@ -41,22 +42,22 @@ public class Main {
             System.out.println("Select Chat-Room");
             System.out.println("Write 'All' to select common room or 'Sport' to select sport fanats room");
             String room = scanner.nextLine();
-            if(room==null||room.isEmpty()){
+            if (room == null || room.isEmpty()) {
                 room = "All";
             }
             user.setRoom(room);
 
-            Thread th = new Thread(new GetThread(user));
-            th.setDaemon(true);
-            th.start();
-           
-            System.out.println("Enter user login whom the message will sent");
-            String to = scanner.nextLine();
-            System.out.println("Is it a private message?(Yes/No)");
-            String isPrivate = scanner.nextLine();
+            Socket socket = new Socket("localhost", 8080);            ;
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-            System.out.println("Enter your message: ");
             while (true) {
+                System.out.println("Enter user login whom the message will sent");
+                String to = scanner.nextLine();
+                System.out.println("Is it a private message?(Yes/No)");
+                String isPrivate = scanner.nextLine();
+                System.out.println("Enter your message: ");
+
                 String text = scanner.nextLine();
                 if (text.isEmpty()) {
                     break;
@@ -72,7 +73,7 @@ public class Main {
                         if (isPrivate.equalsIgnoreCase("Yes")) {
                             m.setIsprivate(true);
                         }
-                      //  writer.write(m.toJSON());
+                        //  writer.write(m.toJSON());
 
                         int res = m.send(Utils.getURL() + "/add");
 
@@ -85,7 +86,8 @@ public class Main {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
